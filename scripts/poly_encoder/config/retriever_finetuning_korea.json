@@ -1,0 +1,67 @@
+{
+  "ddp": {
+    "world_size": 4,
+    "rank": 0,
+    "gpu_devices": "0,1,2,3",
+    "backend": "nccl",
+    "protocol": "tcp",
+    "host": "127.0.0.1",
+    "port":"3456"
+  },
+  "train": {
+    "seed": 12345,
+    "epoch": 200,
+    "batch_size": 56,
+    "amp": true,
+    "temp_save_path": "/home/mnt/guest1/model/temp/",
+    "save_path": "/home/mnt/guest1/model/poly_encoder/dialog_retriever/20210829/",
+    "resume_path": "/home/mnt/guest1/model/temp/",
+    "lr_update": false,
+    "num_warmup_steps": 2000,
+    "save_per_epoch": 1,
+    "save_per_batch": -1,
+    "keep_last": false,
+    "verbose_per_epoch": 1,
+    "verbose_per_batch": -1
+  },
+  "data": {
+    "language": "kor",
+    "spm_model_path": "{root_dir}/spm_model/{language}/spoken_pretrain_spm_v{vocab_size}",
+    "uncased": true,
+    "encoding": "utf-8",
+    "root_dir": "/home/mnt/guest1/",
+    "sample_data_dir": "{root_dir}/dataset/preprocessed/dialog_finetuning/kor/multi_turn/sample/",
+    "train_data_dir": "{root_dir}/dataset/preprocessed/dialog_finetuning/kor/multi_turn/train/",
+    "val_data_dir": "{root_dir}/dataset/preprocessed/dialog_finetuning/kor/multi_turn/val/",
+    "extension": "json"
+  },
+  "model": {
+    "context_encoder": {
+      "model_type": "bert",
+      "model_path": "{root_dir}/model/bert/dialog_pretrain/20210823/epoch_3/"
+    },
+    "candidate_encoder": {
+      "model_type": "bert",
+      "model_path": "{root_dir}/model/bert/dialog_pretrain/20210823/epoch_3/"
+    },
+    "m_code": 64,
+    "aggregation_method": "first"
+  },
+  "optimizer": {
+    "beta_1": 0.9,
+    "beta_2": 0.98,
+    "optimizer_epsilon": 1e-5,
+    "initial_learning_rate": 1e-5
+  },
+  "criterion": {
+    "ce": 1.0
+  },
+  "data_loader": {
+    "left_sep_tokens": [["cls", "sep"]],
+    "right_sep_tokens": [["cls", "sep"]],
+    "left_fixed_segment_id": 0,
+    "right_fixed_segment_id": 1,
+    "approach": "ignore",
+    "assert_isinstance_list": null
+  }
+}

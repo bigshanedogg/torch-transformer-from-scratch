@@ -1,0 +1,75 @@
+{
+  "ddp": {
+    "world_size": 4,
+    "gpu_devices": "0,1,2,3",
+    "rank": 0,
+    "backend": "nccl",
+    "protocol": "tcp",
+    "host": "127.0.0.1",
+    "port":"3456"
+  },
+  "train": {
+    "seed": 12345,
+    "epoch": 105,
+    "batch_size": 12,
+    "amp": true,
+    "temp_save_path": "/home/picas/_jupyter/model/temp/",
+    "save_path": "/home/picas/_jupyter/model/transformer/dialog_pretrain/20210729/",
+    "resume_path": "/home/picas/_jupyter/model/temp/20210731_170007/epoch_95/",
+    "criterion_weights": {
+      "lm": 1.0,
+      "ul": 0.0
+    },
+    "optimizer": {
+      "beta_1": 0.9,
+      "beta_2": 0.98,
+      "optimizer_epsilon": 1e-5,
+      "initial_learning_rate": 2e-4
+    },
+    "lr_update": false,
+    "num_warmup_steps": 2000,
+    "save_per_epoch": 1,
+    "save_per_batch": -1,
+    "keep_last": true,
+    "verbose_per_epoch": 1,
+    "verbose_per_batch": 500
+  },
+  "data": {
+    "src_language": "kor",
+    "tgt_language": "kor",
+    "src_spm_model_path": "{root_dir}/spm_model/{language}/spoken_pretrain_spm_v{vocab_size}",
+    "tgt_spm_model_path": "{root_dir}/spm_model/{language}/spoken_pretrain_spm_v{vocab_size}",
+    "uncased": true,
+    "encoding": "utf-8",
+    "root_dir": "/home/picas/_jupyter/",
+    "sample_data_dir": "{root_dir}/dataset/preprocessed/dialog_pretrain/kor/multi_turn_v2/sample/",
+    "train_data_dir": "{root_dir}/dataset/preprocessed/dialog_pretrain/kor/multi_turn_v2/",
+    "val_data_dir": "{root_dir}/dataset/preprocessed/dialog_pretrain/kor/multi_turn_v2/",
+    "extension": "json"
+  },
+  "model": {
+    "src_timesteps": 128,
+    "tgt_timesteps": 128,
+    "src_vocab_size": 15000,
+    "tgt_vocab_size": 15000,
+    "embedding_dict": {
+      "segment": 2
+    },
+    "d_model": 512,
+    "d_ff": 2048,
+    "num_heads": 16,
+    "num_encoder_layers": 8,
+    "num_decoder_layers": 8,
+    "shared_embedding": true,
+    "dropout": 0.1,
+    "pwff_activation": "gelu",
+    "linear_activation": "gelu",
+    "bias": true,
+    "layer_norm_epsilon": 1e-05,
+    "initialization": "normal"
+  },
+  "data_loader": {
+    "src_sep_tokens": [["cls", "sep"], [null, "sep"]],
+    "approach": "ignore"
+  }
+}

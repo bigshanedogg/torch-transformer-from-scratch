@@ -1,2 +1,2 @@
-# torch-transformer-from-scratch
-Pytorch Transformer &amp; Bert implementation to pretrain submodules of BlenderBot
+# torch-transformer
+torch-transformer, gpt, bert
